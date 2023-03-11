@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Outdoor Adventures Company Trips{% endblock %}
+
+{% block content %}
+<h1 class="mt-5 text-info">Outdoor Adventures Company Trips</h1>
+<table class="table table-striped border border-info"">
+    <thead>
+      <tr>
+        <th>Trip Name</th>
+        <th>Start Date</th>
+        <th>Length</th>
+        <th>Location</th>
+        <th>Level</th>
+        <th>Leader</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for trip in trips %}
+      <tr>
+        <td class="text-info"><a href="{{ url_for('trip', trip_id=trip['Trip Name']) }}"><button type="button" class="btn btn-info">{{ trip['Trip Name'] }}</button></a></td>
+        <td>{{ trip['Start Date'] }}</td>
+        <td>{{ trip['Length'] }}</td>
+        <td>{{ trip['Location'] }}</td>
+        <td>{{ trip['Level'] }}</td>
+        <td>{{ trip['Leader'] }}</td>
+        <td>{{ trip['Cost'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endblock %}

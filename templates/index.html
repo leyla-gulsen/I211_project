@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Outdoor Adventures{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <img class="img-fluid mt-5" src="{{ url_for('static', filename='images/cappadocia.jpeg') }}" alt="{{ cappadocia }}">
+</div>
+
+<h1 class="mt-5 text-center text-info">Outdoor Adventures</h1>
+<h5 class="text-center" style="font-weight:normal">Here at Outdoor Adventures, we provide many unique trips around touristic hotspots of Turkey!</h5>
+<br>
+<div class="text-center">
+    <a href="{{ url_for('trips') }}">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-info">See Trips</button>
+    </a>
+    <a href="{{ url_for('members') }}">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-info">See Members</button>
+    </a>
+</div>
+
+
+
+
+{% endblock %}
+<!-- <button type="button" class="btn btn-primary btn-lg px-4 gap-3 justify-content-sm-center align-content-center" onclick="{{ url_for('members') }}">See Members</button> -->

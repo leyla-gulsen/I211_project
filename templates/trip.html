@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ trip['Trip Name'] }}{% endblock %}
+
+{% block content %}
+
+<h1 class="mt-5 text-info">{{ trip['Trip Name'] }}</h1>
+<p><strong class="text-info">Start Date:</strong> {{ trip ['Start Date'] }}</p>
+<p><strong class="text-info">Length:</strong> {{ trip['Length'] }}</p>
+<p><strong class="text-info">Location:</strong> {{ trip['Location'] }}</p>
+<p><strong class="text-info">Level:</strong> {{ trip['Level'] }}</p>
+<p><strong class="text-info">Leader:</strong> {{ trip['Leader'] }}</p>
+<p><strong class="text-info">Cost:</strong> {{ trip['Cost'] }}</p>
+<p><strong class="text-info">Description:</strong> {{ trip['Description'] }}</p>
+
+{% endblock %}
