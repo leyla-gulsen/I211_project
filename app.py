@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-import csv, datetime # datetime for sorting members in members.html
+import csv
 
 app = Flask(__name__)
 
@@ -12,13 +12,6 @@ MEM_KEYS = ['Name', 'DoB', 'Email', 'Address', 'Phone']
 
 # functions from A7
     # takes data from trips.csv, returns a list of dictionaries, each dict is a trip
-# def get_trips():
-#     trips_list = []
-#     with open(TRIPS_PATH, 'r') as csvfile: # only need to read to grab data 
-#         csvreader = csv.DictReader(csvfile) 
-#         for row in csvreader: 
-#             trips_list.append(row) # appending each row of the file into trips_list
-#     return trips_list
 
 def get_trips():
     with open(TRIPS_PATH, 'r') as csvfile:
@@ -41,9 +34,7 @@ def get_members():
         data = csv.DictReader(csvfile)
         members=list(data)
         return members
-        # for row in csvreader:
-        #     members_list.append(row) # appending each row of the file into members_list
-
+    
 def set_members(member_list):
     with open(MEM_PATH, mode='w', newline='') as csvfile: # opening in 'w' because 'a' would just double data in file because in main, we are grabbing the list from the file in get_members and appending new data
         # fieldnames = ['Name', 'DoB', 'Email', 'Address', 'Phone'] # need to set header row so it can add it again
@@ -60,19 +51,12 @@ def set_members(member_list):
 def index():
     return render_template('index.html')
 
-
 @app.route('/trips')
 def trips():
     trips=get_trips()
     if not trips:
         return 'Error no trips' # error for my reference if failed
     return render_template('trips.html',trips=trips)
-    # print(trips)
-    # if t in trips:
-    #     print(t)
-    #     return render_template('trip.html', trip=trips[t])
-    # else:
-    #     return render_template('trips.html', trips=trips)
     
 # creating links to each Trip Name iin 'trips.html' to a new page of details of specific trip
 @app.route('/trips/<trip_id>')
