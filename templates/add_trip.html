@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a Trip{% endblock %}
+
+{% block content %}
+
+<h1 class="mt-5 pt-5 text-info">Add a Trip</h1>
+<form action="{{ url_for('add_trip') }}" method="POST">
+    <div class="mb-3">
+        <label for="trip_name" class="form-label">Trip Name</label>
+        <input class="form-control" type="text" name="trip_name" id="name" placeholder="Trip Name" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="start_date" class="form-label">Start Date</label>
+        <input class="form-control" type="text" name="start_date" id="start_date" placeholder="YYYY-MM-DD"
+            pattern="(202[3-9]|20[3-9][0-9]|2100)-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])" required>
+        <!-- pattern is for any year between 2023 and 2100, months 1-12, and day 1-31-->
+        <div class="form-text">Type the date in the format YYYY-MM-DD.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="length" class="form-label">Length</label>
+        <select class="form-select" name="length" id="length">
+            <option value="1 day">1 day</option>
+            <option value="2 days">2 days</option>
+            <option value="3 days">3 days</option>
+            <option value="4 days">4 days</option>
+            <option value="5 days">5 days</option>
+            <option value="6 days">6 days</option>
+            <option value="7 days">7 days</option>
+        </select>
+        <div class="form-text">Select trip duration between 1 day and 1 week. Year must be 2023 and beyond.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input class="form-control" type="text" name="location" id="location" placeholder="Location" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="level" class="form-label">Level</label>
+        <select class="form-select" name="level" id="level">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+        <div class="form-text">Select Beginner, Intermediate, or Advanced.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="leader" class="form-label">Leader</label>
+        <input type="text" name="leader" id="leader" class="form-control">
+        <div class="form-text">Enter the first and last name of the trip leader.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="cost" class="form-label">Cost</label>
+        <input type="text" name="cost" id="cost" class="form-control" placeholder="$000.00" pattern="\$\d+\.\d{2}">
+        <div class="form-text">Enter the cost of the trip by including the dollar sign and decimal point (Ex: $123.45).
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3"
+            placeholder="Describe the trip..."></textarea>
+    </div>
+
+    <button type="submit" value="Submit"
+        class="btn btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-success">Add Trip</button>
+    <button type="reset" value="Reset"
+        class="btn btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-danger">Reset</button>
+    <a href="{{ url_for('trips') }}" class="btn btn-lg btn-info">Back to Trips</a>
+</form>
+
+
+{% endblock %}

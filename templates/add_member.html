@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a Member{% endblock %}
+
+{% block content %}
+
+
+<!-- referred to W3 schools for different input types https://www.w3schools.com/html/html_form_input_types.asp -->
+<h1 class="mt-5 pt-5 text-info">Add a Member</h1>
+<form action="{{ url_for('add_member') }}" method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input class="form-control" type="text" name="name" id="name" placeholder="John Doe" required>
+        <div class="form-text">Type the first and last name with one (1) space between.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input class="form-control" type="date" name="dob" id="dob" required>
+        <div class="form-text">Use the calendar to select the date of birth or type it in manually.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input class="form-control" type="email" name="email" id="email" placeholder="johndoe@gmail.com" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input class="form-control" type="text" name="address" id="address" placeholder="123 Sesame St Springboro"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input class="form-control" type="tel" name="phone" id="phone" placeholder="(888)555-1212"
+            pattern="\(\d{3}\)\d{3}-\d{4}" required>
+        <!-- slashes \ allow for () and - to be ignored and \d for digits, {} is number count, similar to the patterns assignment we did to locate things in files-->
+        <div class="form-text">Follow the (888)555-1212 format of the phone number, no spaces.</div>
+    </div>
+
+    <button type="submit" value="Submit"
+        class="btn btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-success">Add Member</button>
+    <button type="reset" value="Reset"
+        class="btn btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-danger">Reset</button>
+    <a href="{{ url_for('members') }}" class="btn btn-lg btn-info">Back to Members</a>
+</form>
+
+
+{% endblock %}
