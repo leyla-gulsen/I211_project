@@ -1,7 +1,7 @@
-Name,DoB,Email,Address,Phone
-Aylin Şahin,10/12/95,aylin.sahin@hotmail.com,3121 Walnut St Ellettsville,(876)543-2735
-Tolga Yilmaz,2/5/82,tolga.demir@yahoo.com,4530 Park Blvd Indianapolis,(321)098-7535
-Elif Demir,9/19/90,elif.yilmaz@outlook.com,225 Main St Bloomington,(987)654-3210
-Dilara Kaya,12/31/85,dilara.kaya@gmail.com,1507 S King St Indianapoolis,(908)734-1840
-Deniz Gulsen,9/8/93,deniz.gulsen@yahoo.com,1017 Olive St Ellettsville,(432)950-5942
-Cemal Akin,5/23/89,cemal.akin@gmail.com,6785 Elmwood Ave Bloomington,(210)987-6435
+name,address,email,dob,phone
+Aylin Şahin,3121 Walnut St Ellettsville,aylin.sahin@hotmail.com,10/12/95,(876)543-2735
+Tolga Yilmaz,4530 Park Blvd Indianapolis,tolga.demir@yahoo.com,2/5/82,(321)098-7535
+Elif Demir,225 Main St Bloomington,elif.yilmaz@outlook.com,9/19/90,(987)654-3210
+Dilara Kaya,1507 S King St Indianapoolis,dilara.kaya@gmail.com,12/31/85,(908)734-1840
+Deniz Gulsen,1017 Olive St Ellettsville,deniz.gulsen@yahoo.com,9/8/93,(432)950-5942
+Cemal Akin,6785 Elmwood Ave Bloomington,cemal.akin@gmail.com,5/23/89,(210)987-6435

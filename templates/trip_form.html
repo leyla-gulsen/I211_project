@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if trip_id %}
+        Edit a Trip
+    {% else %}
+        Create a Trip!
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if trip %}
+    {% set name = trip['name'] %}
+    {% set level = trip['level'] %}
+    {% set start_date = trip['start_date'] %}
+    {% set length = trip['length'] %}
+    {% set location = trip['location'] %}
+    {% set cost = trip['cost'] %}
+    {% set leader = trip['leader'] %}
+    {% set description = trip['description'] %}
+    <h2 class="mt-5 pt-5 text-info">Edit trip: {{ name }}</h2>
+{% elif not errors %}
+    {% set name = '' %}
+    {% set level = '' %}
+    {% set start_date = '' %}
+    {% set length = '' %}
+    {% set location = '' %}
+    {% set cost = '' %}
+    {% set leader = '' %}
+    {% set description = '' %}
+    <h2 class="mt-5 pt-5 text-info">Create a new trip:</h2>
+{% endif %}
+
+<form method="POST" name="event_form" class="container">
+    <div class="row my-2">
+        <div class="col-md-2 text-nowrap text-end">
+            <label class="form-label" for="name">Name:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="name" name="name" value="{{name}}" size="60" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="level">Activity Level:</label>
+        </div>
+        <div class="col">
+            <select class="form-select" name="level">
+                <option {% if level=="beginner" %}selected{% endif %} value="beginner">
+                    Beginner
+                </option>
+                <option {% if level=="intermediate" %}selected{% endif %} value="intermediate">
+                    Intermediate
+                </option>
+                <option {% if level=="advanced" %}selected{% endif %} value="advanced">
+                    Advanced
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="start_date">Start Date:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="date" id="start_date" name="start_date" 
+            value="{{start_date}}"
+            size="40" />
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="length">Length:</label>
+        </div>
+        <div class="col">
+            <select class="form-select" name="length">
+                <option {% if length=="1" %}selected{% endif %} value="1">
+                    1 day
+                </option>
+                <option {% if length=="3" %}selected{% endif %} value="3">
+                    3 days
+                </option>
+                <option {% if length=="5" %}selected{% endif %} value="5">
+                    5 days
+                </option>
+                <option {% if length=="7" %}selected{% endif %} value="7">
+                    7 days
+                </option>
+                <option {% if length=="9" %}selected{% endif %} value="9">
+                    9 days
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="location">Location:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="location" name="location" 
+            value="{{location}}"  
+            size="40" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="cost">Cost:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="cost" name="cost" 
+            value="{{cost}}"  
+            size="40" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="leader">Leader:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="leader" name="leader" 
+            value="{{leader}}"  
+            size="40" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="description">Description:</label>
+        </div>
+        <div class="col">
+            <textarea class="form-control" id="description" name="description" cols="40" rows="5"
+                value="{{ descr }}"
+            >{{description}}</textarea>
+        </div>
+    </div>
+    <div class="my-2 text-center">
+        <input type="submit" value="Save" class="btn btn-success" />
+        <input type="reset" value="Reset" class="btn btn-danger" />
+    </div>
+</form>
+{% endblock %}

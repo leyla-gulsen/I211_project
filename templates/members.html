@@ -1,34 +1,31 @@
 {% extends 'base.html' %}
 
-{% block title %}Outdoor Adventures Club Members{% endblock %}
-
 {% block content %}
 
-<h1 class="mt-5 pt-5 text-info">Outdoor Adventures Club Members</h1>
-<table class="table table-striped border border-info">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Date of Birth</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Phone</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for member in members %}
-        <tr>
-            <td><strong class="text-info">{{ member['Name'] }}</strong></td>
-            <td>{{ member['DoB'] }}</td>
-            <td>{{ member['Email'] }}</td>
-            <td>{{ member['Address'] }}</td>
-            <td>{{ member['Phone'] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container">
+    <h1 class="mt-5 pt-5 text-info">Outdoor Adventures Club Members</h1>
+    <table class="table table-striped border border-info">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>DOB</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members: %}
+            <tr>
+                <td class="text-info fw-bold">{{ member['name'] }}</td>
+                <td>{{ member['email'] }}</td>
+                <td>{{ member['address'] }}</td>
+                <td>{{ member['dob'] }}</td>
+                <td>{{ member['phone'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<a href="{{ url_for('add_member') }}"
-    class="btn btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-success">Add a Member</a>
-
+<a class="btn btn-success px-4 gap-3 justify-content-center align-items-center" href="{{ url_for('create_member') }}">Add a Member!</a>
 {% endblock %}

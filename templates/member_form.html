@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+        Add a Member!
+{% endblock %}
+
+{% block content %}
+    <h2 class="mt-5 pt-5 text-info">Add a New Member:</h2>
+
+<form method="POST" name="member_form" class="container">
+    <div class="row my-2">
+        <div class="col-md-2 text-nowrap text-end">
+            <label class="form-label" for="name">Name:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="name" name="name"  size="60" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="address">Address:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="address" name="address"  size="60" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="phone">Phone:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" id="phone" name="phone"  size="60" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="email">Email</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="email" id="email" name="email" size="40" />
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-2 text-end">
+            <label class="form-label" for="dob">DOB:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="date" id="dob" name="dob" size="40" />
+        </div>
+    </div>
+    
+    <div class="my-2 text-center">
+        <input type="submit" value="Save" class="btn btn-success" />
+        <input type="reset" value="Reset" class="btn btn-danger" />
+    </div>
+</form>
+{% endblock %}

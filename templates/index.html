@@ -1,31 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Outdoor Adventures{% endblock %}
+{% block title%}Outdoor Adventures!{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <img class="img-fluid mt-5 pt-5" src="{{ url_for('static', filename='images/cappadocia.jpeg') }}"
-        alt="{{ cappadocia }}">
+
+<div class="container-sm px-4 py-5 my-5 text-center bg-white text-dark bg-opacity-50">
+    <img class="d-block mx-auto mb-2 img-fluid" src="{{ url_for('static', filename='images/cappadocia.jpeg') }}">
+    <h1 class="display-5 fw-bold text-info">Outdoor Adventures</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Here at Outdoor Adventures, we provide many unique trips around touristic hotspots of Turkey!</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{{ url_for('list_trips') }}">
+                <button type="button" class="btn btn-info btn-lg px-4 gap-3">See trips!</button>
+            </a>
+            <a href="{{ url_for('list_members') }}">
+                <button type="button" class="btn btn-info btn-lg px-4 gap-3">See Members</button>
+            </a>
+        </div>
+    </div>
 </div>
-
-<h1 class="mt-5 text-center text-info">Outdoor Adventures</h1>
-<h5 class="text-center" style="font-weight:normal">Here at Outdoor Adventures, we provide many unique trips around
-    touristic hotspots of Turkey!</h5>
-<br>
-<div class="text-center">
-    <a href="{{ url_for('trips') }}">
-        <button type="button"
-            class="btn btn-primary btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-info">See
-            Trips</button>
-    </a>
-    <a href="{{ url_for('members') }}">
-        <button type="button"
-            class="btn btn-primary btn-lg px-4 gap-3 justify-content-sm-center align-content-center btn-info">See
-            Members</button>
-    </a>
-</div>
-
-
-
-
 {% endblock %}
