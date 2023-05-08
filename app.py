@@ -189,7 +189,9 @@ def view_trip(trip_id=None):
     if trip_id is not None:
         trip = database.get_trip(trip_id)
         if trip is not None:
-            return render_template('trip.html', trip_id=trip_id, trip=trip)
+            attendees = database.get_attendees(trip_id)
+            not_attendees = database.get_not_attendees(trip_id)
+            return render_template('trip.html', trip_id=trip_id, trip=trip, attendees=attendees, not_attendees=not_attendees)
         else:
             return redirect(url_for('list_trips'))
     else:
@@ -279,11 +281,15 @@ def delete_trip(trip_id=None):
     trip_id = int(trip_id)
     delete=request.args.get('delete', None)
     trip = database.get_trip(trip_id)
+    attendees = []
     if delete == "1":
+        attendees = database.get_attendees(trip_id)
+        for attendee in attendees:
+            database.remove_member_trip(trip_id, attendee['member_id'])
         database.delete_trip(trip_id)
         return redirect(url_for('list_trips'))  
     else:
-        return render_template('delete_form.html', trip_id=trip_id, trip=trip)     
+        return render_template('delete_form.html', trip_id=trip_id, trip=trip, attendees=attendees)     
 
 @app.route('/member/<member_id>/delete', methods=['GET', 'POST'])
 def delete_member(member_id=None):
@@ -295,6 +301,19 @@ def delete_member(member_id=None):
         return redirect(url_for('list_members'))
     else:
         return render_template('delete_member.html', member_id=member_id, member=member)
+    
+@app.route('/trips/<trip_id>/attendees/add', methods=['POST'])
+def add_attendee(trip_id):
+    if request.method == 'POST':
+        member_id = request.form.get('member_id')
+        if member_id:
+            database.add_member_trip(trip_id, member_id)
+    return redirect(url_for('view_trip', trip_id=trip_id))
+
+@app.route('/trips/<trip_id>/attendees/<member_id>/delete', methods=['POST'])
+def delete_attendee(trip_id, member_id):
+    database.remove_member_trip(trip_id, member_id)
+    return redirect(url_for('view_trip', trip_id=trip_id))
 
 #
 # MAIN

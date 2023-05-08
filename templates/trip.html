@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-2"></div>
         <div class="col-6">
-            <h2 class="text-info">{{ trip['trip_name'] }}</h2>
+            <h2 class="text-info fw-bold">{{ trip['trip_name'] }}</h2>
         </div>
     </div>
     <div class="row">
@@ -40,45 +40,63 @@
         <div class="col-2"><strong>Leader:</strong></div>
         <div class="col">{{ trip['leader'] }}</div>
     </div>
-    <div class="row mb-3">
+    <div class="row">
         <div class="col-2"></div>
         <div class="col-2"><strong>Description:</strong></div>
         <div class="col">{{ trip['description'] }}</div>
     </div>
 </div>
-
-{% if attendees %}
-<div class="row">
-    <div class="col-2"></div>
-    <div class="col-6">
-        <h2 class="text-primary">Attendees</h2>
-    </div>
+<div class="my-2 text-center">
+    <a href="{{ url_for('list_trips') }}" class="btn btn-info">Back to trips</a>
+    <a href="{{ url_for('edit_trip', trip_id=trip_id) }}" class="btn btn-primary">Edit this trip</a>
+    <a href="{{ url_for('delete_trip', trip_id=trip_id) }}" class="btn btn-danger">Delete this trip</a>
 </div>
-<li class="row pb-sm-3 pb-md-0">
-    <div class="col-md-3 text-nowrap"><strong>Name</strong></div>
-    <div class="col-md-2 text-nowrap"><strong>Email</strong></div>
-    <div class="col-md-2 text-nowrap"><strong>Phone</strong></div>
-    <div class="col-md-2 text-nowrap"><strong>DOB</strong></div>
-</li>
-{% for attendee in attendees: %}
-<li class="row pb-sm-3 pb-md-0 mb-1">
-    <div class="col-md-3 text-nowrap">{{ attendee['fname'] }} {{ attendee['lname'] }}</div>
-    <div class="col-md-2 text-nowrap">{{ attendee['email'] }}</div>
-    <div class="col-md-2 text-nowrap">{{ attendee['phone'] }} </div>
-    <div class="col-md-2 text-nowrap">{{ attendee['dob'] }}</div>
-    <div class="col-2 text-nowrap">
-        <a href="{{ url_for('edit_attendee', trip_id=trip_id, attendee_id=attendee['attendee_id'] ) }}" class="btn btn-primary btn-sm" role="button">Edit</a>
-        <a href="{{ url_for('delete_attendee', trip_id=trip_id, attendee_id=attendee['attendee_id'] ) }}" class="btn btn-danger btn-sm" role="button">Delete</a>
-    </div>
-</li>
-{% endfor %}
-
+<h3 class="text-info">Attendees</h3>
+{% if attendees %}
+<table class="table table-stripe border border-info">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>DOB</th>
+            <th>Address</th>
+            <th>Delete Attendee?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for attendee in attendees: %}
+        <tr>
+            <td>{{ attendee['fname'] }} {{ attendee['lname'] }}</td>
+            <td>{{ attendee['email'] }}</td>
+            <td>{{ attendee['phone'] }}</td>
+            <td>{{ attendee['dob'] }}</td>
+            <td>{{ attendee['address'] }}</td>
+            <td>
+                <form action="{{ url_for('delete_attendee', trip_id=trip_id, member_id=attendee['member_id']) }}" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-danger">There are currently no attendees for this trip.</p>
 {% endif %}
-
+<form class="container my-2 " action="{{ url_for('add_attendee', trip_id=trip_id) }}" method="POST">
+    <label for="member_id" class="form-label fw-bold">Add an attendee:</label>
+    <select class="form-select" name="member_id">
+        {% for member in not_attendees %}
+            <option value="{{ member['member_id'] }}">{{ member['fname'] }} {{ member['lname'] }}</option>
+        {% endfor %}
+    </select>
     <div class="my-2 text-center">
-        <a href="{{ url_for('list_trips') }}" class="btn btn-info">Back to trips</a>
-        <a href="{{ url_for('edit_trip', trip_id=trip_id) }}" class="btn btn-primary">Edit this trip</a>
-        <a href="{{ url_for('delete_trip', trip_id=trip_id) }}" class="btn btn-danger">Delete this trip</a>
+        <button type="submit" class="btn btn-info">Add Attendee</button>
     </div>
+    
+</form>
+
+
 
 {% endblock %}

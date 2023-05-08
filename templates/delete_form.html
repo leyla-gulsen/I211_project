@@ -3,7 +3,7 @@
 {% block title %}Delete trip{% endblock %}
 
 {% block content %}
-<h2 class="text-danger mt-5 pt-5">Delete trip: {{ trip['trip_name'] }}</h2>
+<h2 class="text-danger mt-5 pt-5">&#9888; DELETE TRIP: {{ trip['trip_name'] }} &#9888;</h2>
 <div class="container">
     <div class="row">
         <div class="col-3"><strong>Activity Level:</strong></div>
@@ -36,8 +36,8 @@
 </div>
 <div class="row">
 <div class="col-6 text-center">
-    <a href="{{ url_for('view_trip', trip_id=trip_id) }}" class="btn btn-success">Back to trip Details</a>
-    <a href="{{ url_for('delete_trip', trip_id=trip_id, delete='1') }}" class="btn btn-danger">Really Delete This trip</a>
+    <a href="{{ url_for('view_trip', trip_id=trip_id) }}" class="btn btn-info">Back to Trip Details</a>
+    <a href="{{ url_for('delete_trip', trip_id=trip_id, delete='1') }}" class="btn btn-danger"><span class="fw-bold">CONFIRM</span> Delete this Trip</a>
 </div>
 </div>
 {% endblock %}

@@ -224,6 +224,20 @@ def get_attendees(trip_id):
         if conn:
             conn.close()
 
+def get_not_attendees(trip_id):
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT * FROM members WHERE member_id NOT IN (SELECT member_id FROM trip_members WHERE trip_id = %s)"
+            cursor.execute(sql, (trip_id,))
+            members = cursor.fetchall()
+            return members
+    except pymysql.err.ProgrammingError as ERROR:
+        print("There was an error while executing the SQL query: '" + str(sql) + "'. Error: " + str(ERROR))
+    finally:
+        if conn:
+            conn.close()
+
 if __name__ == '__main__':
     #add more test code here to make sure all your functions are working correctly
     try:
