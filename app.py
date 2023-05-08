@@ -182,7 +182,6 @@ def list_trips():
 @app.route('/members/')
 def list_members():
     members = database.get_members()
-    print(members)
     return render_template('members.html', members=members)
 
 @app.route('/trips/<trip_id>/')
