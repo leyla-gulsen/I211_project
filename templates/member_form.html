@@ -7,49 +7,68 @@
 {% block content %}
     <h2 class="mt-5 pt-5 text-info">Add a New Member:</h2>
 
+{% if error %} 
+<h4 class="lead text-danger">Form error: {{ error }}</h4>
+{% endif %}
+
 <form method="POST" name="member_form" class="container">
     <div class="row my-2">
-        <div class="col-md-2 text-nowrap text-end">
-            <label class="form-label" for="name">Name:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="fname">First Name:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="text" id="name" name="name"  size="60" />
-        </div>
-    </div>
-    <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="address">Address:</label>
-        </div>
-        <div class="col">
-            <input class="form-control" type="text" id="address" name="address"  size="60" />
+        <div class="">
+            <input class="form-control" maxlength="20" type="text" id="fname" name="fname"  size="60" placeholder="John" required />
+            <div class="form-text fst-italic">Please enter a first name up to 20 characters.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="phone">Phone:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="lname">Last Name:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="text" id="phone" name="phone"  size="60" />
-        </div>
-    </div>
-    <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="email">Email</label>
-        </div>
-        <div class="col">
-            <input class="form-control" type="email" id="email" name="email" size="40" />
+        <div class="">
+            <input class="form-control" maxlength="20" type="text" id="lname" name="lname"  size="60" placeholder="Doe" required />
+            <div class="form-text fst-italic">Please enter a last name up to 20 characters.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="dob">DOB:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="address">Address:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="date" id="dob" name="dob" size="40" />
+        <div class="">
+            <input class="form-control" maxlength="50" type="text" id="address" name="address"  size="60" placeholder="123 Sesame St New York City" required />
+            <div class="form-text fst-italic">Please enter an address up to 50 characters.</div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="">
+            <label class="form-label fw-bold" for="phone">Phone:</label>
+        </div>
+        <div class="">
+            <input class="form-control" maxlength="12" type="phone" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" size="60" placeholder="123-123-8888" required />
+            <div class="form-text fst-italic">Please enter a phone number following the pattern above, including the dashes.</div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="">
+            <label class="form-label fw-bold" for="email">Email</label>
+        </div>
+        <div class="">
+            <input class="form-control" maxlength="25" type="email" id="email" name="email" size="40" placeholder="johndoe@email.com" required />
+            <div class="form-text fst-italic">Please enter an email up to 25 characters.</div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="">
+            <label class="form-label fw-bold" for="dob">Date of Birth:</label>
+        </div>
+        <div class="">
+            <input class="form-control" type="date" id="dob" name="dob" size="40" required />
+            <div class="form-text fst-italic">Please enter a date of birth, or select the calendar icon to use the calendar feature.</div>
         </div>
     </div>
     
     <div class="my-2 text-center">
+        <a href="{{ url_for('list_members') }}" class="btn btn-info">Back to members</a>
         <input type="submit" value="Save" class="btn btn-success" />
         <input type="reset" value="Reset" class="btn btn-danger" />
     </div>

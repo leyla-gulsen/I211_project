@@ -9,7 +9,7 @@ CREATE TABLE trips (
     start_date DATE,
     location VARCHAR(50),
     length INT,
-    leader VARCHAR(255),
+    leader VARCHAR(40),
     cost INT,
     description TEXT
 ) ENGINE INNODB AUTO_INCREMENT=1;

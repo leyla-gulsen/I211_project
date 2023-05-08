@@ -11,7 +11,7 @@
 {% block content %}
 
 {% if trip %}
-    {% set name = trip['name'] %}
+    {% set trip_name = trip['trip_name'] %}
     {% set level = trip['level'] %}
     {% set start_date = trip['start_date'] %}
     {% set length = trip['length'] %}
@@ -19,9 +19,9 @@
     {% set cost = trip['cost'] %}
     {% set leader = trip['leader'] %}
     {% set description = trip['description'] %}
-    <h2 class="mt-5 pt-5 text-info">Edit trip: {{ name }}</h2>
+    <h2 class="mt-5 pt-5 text-info">Edit trip: {{ trip_name }}</h2>
 {% elif not errors %}
-    {% set name = '' %}
+    {% set trip_name = '' %}
     {% set level = '' %}
     {% set start_date = '' %}
     {% set length = '' %}
@@ -32,20 +32,26 @@
     <h2 class="mt-5 pt-5 text-info">Create a new trip:</h2>
 {% endif %}
 
+{% if error %} 
+<h4 class="lead text-danger">Form error: {{ error }}</h4>
+{% endif %}
+
+
 <form method="POST" name="event_form" class="container">
     <div class="row my-2">
-        <div class="col-md-2 text-nowrap text-end">
-            <label class="form-label" for="name">Name:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="name">Name:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="text" id="name" name="name" value="{{name}}" size="60" />
+        <div class="">
+            <input class="form-control" maxlength="50" type="text" id="trip_name" name="trip_name" value="{{trip_name}}" size="60" required />
+            <div class="form-text fst-italic">Please enter a trip name up to 50 characters.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="level">Activity Level:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="level">Activity Level:</label>
         </div>
-        <div class="col">
+        <div class="">
             <select class="form-select" name="level">
                 <option {% if level=="beginner" %}selected{% endif %} value="beginner">
                     Beginner
@@ -57,84 +63,96 @@
                     Advanced
                 </option>
             </select>
+            <div class="form-text fst-italic">Please select a level of difficulty for the trip.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="start_date">Start Date:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="start_date">Start Date:</label>
         </div>
-        <div class="col">
+        <div class="">
             <input class="form-control" type="date" id="start_date" name="start_date" 
             value="{{start_date}}"
-            size="40" />
+            size="40" required />
+            <div class="form-text fst-italic">Please enter a start date for the trip, or select the calendar icon to use the calendar feature.</div>
         </div>
     </div>
 
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="length">Length:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="length">Length:</label>
         </div>
-        <div class="col">
+        <div class="">
             <select class="form-select" name="length">
-                <option {% if length=="1" %}selected{% endif %} value="1">
+                <option {% if length|string =="1" %}selected{% endif %} value="1">
                     1 day
                 </option>
-                <option {% if length=="3" %}selected{% endif %} value="3">
+                <option {% if length|string =="3" %}selected{% endif %} value="3">
                     3 days
                 </option>
-                <option {% if length=="5" %}selected{% endif %} value="5">
+                <option {% if length|string =="5" %}selected{% endif %} value="5">
                     5 days
                 </option>
-                <option {% if length=="7" %}selected{% endif %} value="7">
+                <option {% if length|string =="7" %}selected{% endif %} value="7">
                     7 days
                 </option>
-                <option {% if length=="9" %}selected{% endif %} value="9">
+                <option {% if length|string =="9" %}selected{% endif %} value="9">
                     9 days
                 </option>
+                <!-- added |string because value in inputs are strings, and the length was not being preselected -->
             </select>
+            <div class="form-text fst-italic">Please select the length of the trip in days.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="location">Location:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="location">Location:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="text" id="location" name="location" 
+        <div class="">
+            <input class="form-control" maxlength="50" type="text" id="location" name="location" 
             value="{{location}}"  
-            size="40" />
+            size="40" required />
+            <div class="form-text fst-italic">Please enter a location for the trip up to 50 characters.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="cost">Cost:</label>
+        <div class="">
+                <label class="form-label fw-bold" for="cost">Cost:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="text" id="cost" name="cost" 
-            value="{{cost}}"  
-            size="40" />
+        <div class="">
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input class="form-control" maxlength="4" type="number" id="cost" name="cost" 
+                value="{{cost}}"  
+                size="40" required />
+            </div>
+            <div class="form-text fst-italic">Please enter a cost of the trip up to $9,999. Do not include the $ or commas.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="leader">Leader:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="leader">Leader:</label>
         </div>
-        <div class="col">
-            <input class="form-control" type="text" id="leader" name="leader" 
+        <div class="">
+            <input class="form-control" maxlength="40" type="text" id="leader" name="leader" 
             value="{{leader}}"  
-            size="40" />
+            size="40" required />
+            <div class="form-text fst-italic">Please enter the name of the leader for the trip up to 40 characters.</div>
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-md-2 text-end">
-            <label class="form-label" for="description">Description:</label>
+        <div class="">
+            <label class="form-label fw-bold" for="description">Description:</label>
         </div>
-        <div class="col">
-            <textarea class="form-control" id="description" name="description" cols="40" rows="5"
-                value="{{ descr }}"
+        <div class="">
+            <textarea class="form-control" maxlength="255" id="description" name="description" cols="40" rows="5"
+                value="{{ description }} " required
             >{{description}}</textarea>
+            <div class="form-text fst-italic">Please enter a description up to 255 characters.</div>
         </div>
     </div>
-    <div class="my-2 text-center">
+    <div class="my-5 pb-5 text-center">
+        <a href="{{ url_for('list_trips') }}" class="btn btn-info">Back to trips</a>
         <input type="submit" value="Save" class="btn btn-success" />
         <input type="reset" value="Reset" class="btn btn-danger" />
     </div>

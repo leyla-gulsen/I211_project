@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-2"></div>
         <div class="col-6">
-            <h2 class="text-info">{{ trip['name'] }}</h2>
+            <h2 class="text-info">{{ trip['trip_name'] }}</h2>
         </div>
     </div>
     <div class="row">
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-2"></div>
         <div class="col-2"><strong>Length:</strong></div>
-        <div class="col">{{ trip['length'] }} days</div>
+        <div class="col">{{ trip['length'] }} day(s)</div>
     </div>
     <div class="row">
         <div class="col-2"></div>
@@ -76,6 +76,7 @@
 {% endif %}
 
     <div class="my-2 text-center">
+        <a href="{{ url_for('list_trips') }}" class="btn btn-info">Back to trips</a>
         <a href="{{ url_for('edit_trip', trip_id=trip_id) }}" class="btn btn-primary">Edit this trip</a>
         <a href="{{ url_for('delete_trip', trip_id=trip_id) }}" class="btn btn-danger">Delete this trip</a>
     </div>

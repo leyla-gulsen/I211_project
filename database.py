@@ -47,7 +47,7 @@ def get_trip(trip_id):
     try:
         with conn.cursor() as cursor:
             sql = "SELECT * FROM trips WHERE trip_id=%s"
-            cursor.execute(sql, (trip_id))
+            cursor.execute(sql, (trip_id,))
             trip = cursor.fetchone()
             return trip
     except pymysql.err.ProgrammingError as ERROR:
@@ -86,13 +86,28 @@ def update_trip(trip_id, trip):
         if conn:
             conn.close()
 
+def delete_trip(trip_id):
+    '''Deletes the trip with trip_id given'''
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "DELETE FROM trips WHERE trip_id = %s"
+            cursor.execute(sql, (trip_id,))
+            conn.commit()
+            print(f"Trip with trip_id of {trip_id} deleted.\n")
+    except pymysql.err.ProgrammingError as ERROR:
+        print("There was an error while executing the SQL query: '" + str(sql) + "'. Error: " + str(ERROR))
+    finally:
+        if conn:
+            conn.close()
+
 def add_member(member):
     '''Takes as input all of the data for a member and adds a new member to the member table'''
     conn = get_connection()
     try:
         with conn.cursor() as cursor:
             sql = "INSERT INTO members (fname, lname, address, email, phone, dob) VALUES (%s, %s, %s, %s, %s, %s)"
-            cursor.execute(sql, member)
+            cursor.execute(sql, (member['fname'], member['lname'], member['address'], member['email'], member['phone'], member['dob']))
             conn.commit()
             print("5. New member added: " + str(member) + "\n")
     except pymysql.err.ProgrammingError as ERROR:
@@ -111,6 +126,22 @@ def get_members():
             cursor.execute(sql)
             members = cursor.fetchall()
             return members
+    except pymysql.err.ProgrammingError as ERROR:
+        print("There was an error while executing the SQL query: '" + str(sql) + "'. Error: " + str(ERROR))
+    finally:
+        if conn:
+            conn.close()
+
+def get_member(member_id):
+    '''Takes a member_id, returns a single dictionary containing the data for the member with that id'''
+    conn = get_connection()
+    member = {}
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT * FROM members WHERE member_id=%s"
+            cursor.execute(sql, (member_id,))
+            member = cursor.fetchone()
+            return member
     except pymysql.err.ProgrammingError as ERROR:
         print("There was an error while executing the SQL query: '" + str(sql) + "'. Error: " + str(ERROR))
     finally:
@@ -138,7 +169,7 @@ def delete_member(member_id):
     try:
         with conn.cursor() as cursor:
             sql = "DELETE FROM members WHERE member_id = %s"
-            cursor.execute(sql, (member_id))
+            cursor.execute(sql, (member_id,))
             conn.commit()
             print(f"8. Memmber with member_id of {member_id} deleted.\n")
     except pymysql.err.ProgrammingError as ERROR:

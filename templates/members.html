@@ -7,7 +7,8 @@
     <table class="table table-striped border border-info">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Email</th>
                 <th>Address</th>
                 <th>DOB</th>
@@ -17,7 +18,8 @@
         <tbody>
             {% for member in members: %}
             <tr>
-                <td class="text-info fw-bold">{{ member['name'] }}</td>
+                <td class="text-info fw-bold">{{ member['fname'] }}</td>
+                <td class="text-info fw-bold">{{ member['lname'] }}</td>
                 <td>{{ member['email'] }}</td>
                 <td>{{ member['address'] }}</td>
                 <td>{{ member['dob'] }}</td>

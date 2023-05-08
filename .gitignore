@@ -133,3 +133,6 @@ dmypy.json
 .vscode/
 # Mac OS metadata
 .DS_Store
+
+#config.py
+config.py
