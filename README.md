@@ -3,7 +3,7 @@
 **Course**: INFO-I 211, Information Infrastructure II, Spring 2023 <br>
 **Institution**: Indiana University <br>
 **Final Product**: [Outdoor Adventures](https://cgi.luddy.indiana.edu/~lsgulsen/I211_project.cgi/)
-> Imported from IU enterprise account github.iu.edu/lsgulsen
+> Imported from my IU enterprise account github.iu.edu/lsgulsen
 
 ## Project Overview
 
